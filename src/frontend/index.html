@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CEFR Master — B1, B2 &amp; C1 English Practice</title>
+    <meta
+      name="description"
+      content="A complete CEFR study workspace for B1, B2 and C1 learners: mock tests, reading, listening, speaking, writing and a smart dictionary."
+    />
+    <meta name="theme-color" content="#0B0F1A" />
+    <meta property="og:title" content="CEFR Master — B1, B2 &amp; C1 English Practice" />
+    <meta
+      property="og:description"
+      content="Mock tests, graded reading and listening, speaking and writing practice, and a dictionary that tracks the words you save."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://caffeine.ai/imgs/share-logo.jpeg" />
+    <meta property="og:image:alt" content="Built with caffeine.ai" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://caffeine.ai/imgs/share-logo.jpeg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <script>
+      // Apply the persisted theme before first paint to avoid a flash of the
+      // wrong theme. Reads the same `cefr-theme` key the Zustand store writes.
+      (function () {
+        try {
+          var stored = localStorage.getItem("cefr-theme");
+          var theme = "dark";
+          if (stored) {
+            var parsed = JSON.parse(stored);
+            if (parsed && parsed.state && parsed.state.theme) {
+              theme = parsed.state.theme;
+            }
+          }
+          var root = document.documentElement;
+          root.classList.toggle("dark", theme === "dark");
+          root.style.colorScheme = theme;
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>

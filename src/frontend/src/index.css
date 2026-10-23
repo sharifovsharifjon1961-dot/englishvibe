@@ -1,0 +1,321 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 300 700;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 1000;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 800;
+}
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "DM Sans";
+    --font-mono: "JetBrains Mono";
+    --radius: 0.875rem;
+
+    /* Light — "Frosted Study" */
+    --background: 0.98 0.005 250;
+    --foreground: 0.19 0.03 265;
+    --card: 1.0 0.002 250;
+    --card-foreground: 0.19 0.03 265;
+    --popover: 1.0 0.002 250;
+    --popover-foreground: 0.19 0.03 265;
+
+    --primary: 0.55 0.24 293;
+    --primary-foreground: 0.98 0.005 293;
+
+    --secondary: 0.94 0.012 265;
+    --secondary-foreground: 0.25 0.03 265;
+    --muted: 0.95 0.01 265;
+    --muted-foreground: 0.5 0.02 265;
+
+    --accent: 0.7 0.14 210;
+    --accent-foreground: 0.16 0.03 210;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0.005 25;
+    --success: 0.6 0.16 150;
+    --success-foreground: 0.98 0.005 150;
+    --warning: 0.75 0.15 85;
+    --warning-foreground: 0.2 0.03 85;
+
+    --border: 0.9 0.012 265;
+    --input: 0.9 0.012 265;
+    --ring: 0.55 0.24 293;
+
+    --chart-1: 0.55 0.24 293;
+    --chart-2: 0.7 0.14 210;
+    --chart-3: 0.6 0.16 150;
+    --chart-4: 0.75 0.15 85;
+    --chart-5: 0.6 0.2 25;
+
+    --sidebar: 0.97 0.008 265;
+    --sidebar-foreground: 0.19 0.03 265;
+    --sidebar-primary: 0.55 0.24 293;
+    --sidebar-primary-foreground: 0.98 0.005 293;
+    --sidebar-accent: 0.94 0.012 265;
+    --sidebar-accent-foreground: 0.25 0.03 265;
+    --sidebar-border: 0.9 0.012 265;
+    --sidebar-ring: 0.55 0.24 293;
+
+    /* Atmosphere: cursor-tracked flashlight */
+    --mx: 50%;
+    --my: 30%;
+    --flashlight-size: 520px;
+    --flashlight-strength: 0.06;
+    --glow-primary: 0.55 0.24 293;
+    --glow-accent: 0.7 0.14 210;
+
+    --gradient-primary: linear-gradient(
+      120deg,
+      oklch(0.55 0.24 293),
+      oklch(0.7 0.14 210)
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.98 0.005 250),
+      oklch(0.95 0.01 265)
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    /* Dark — "Ink & Neon" */
+    --background: 0.16 0.02 265;
+    --foreground: 0.95 0.01 265;
+    --card: 0.2 0.025 265;
+    --card-foreground: 0.95 0.01 265;
+    --popover: 0.22 0.028 265;
+    --popover-foreground: 0.95 0.01 265;
+
+    --primary: 0.62 0.24 293;
+    --primary-foreground: 0.16 0.02 293;
+
+    --secondary: 0.26 0.03 265;
+    --secondary-foreground: 0.88 0.01 265;
+    --muted: 0.26 0.03 265;
+    --muted-foreground: 0.6 0.02 265;
+
+    --accent: 0.75 0.15 210;
+    --accent-foreground: 0.16 0.02 210;
+
+    --destructive: 0.65 0.2 25;
+    --destructive-foreground: 0.16 0.02 25;
+    --success: 0.68 0.17 150;
+    --success-foreground: 0.16 0.02 150;
+    --warning: 0.78 0.15 85;
+    --warning-foreground: 0.16 0.02 85;
+
+    --border: 0.3 0.03 265;
+    --input: 0.3 0.03 265;
+    --ring: 0.62 0.24 293;
+
+    --chart-1: 0.62 0.24 293;
+    --chart-2: 0.75 0.15 210;
+    --chart-3: 0.68 0.17 150;
+    --chart-4: 0.78 0.15 85;
+    --chart-5: 0.65 0.2 25;
+
+    --sidebar: 0.18 0.022 265;
+    --sidebar-foreground: 0.95 0.01 265;
+    --sidebar-primary: 0.62 0.24 293;
+    --sidebar-primary-foreground: 0.16 0.02 293;
+    --sidebar-accent: 0.26 0.03 265;
+    --sidebar-accent-foreground: 0.88 0.01 265;
+    --sidebar-border: 0.3 0.03 265;
+    --sidebar-ring: 0.62 0.24 293;
+
+    --flashlight-strength: 0.12;
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.16 0.02 265),
+      oklch(0.2 0.025 265)
+    );
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    min-height: 100vh;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  /* Cursor-tracked flashlight layer (pointer devices only) */
+  .flashlight-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      var(--flashlight-size) circle at var(--mx) var(--my),
+      oklch(var(--glow-primary) / var(--flashlight-strength)),
+      transparent 70%
+    );
+    transition: background 0.15s ease-out;
+  }
+
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  /* Pointer-following glow card */
+  .glow-card {
+    position: relative;
+    isolation: isolate;
+  }
+  .glow-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      240px circle at var(--card-mx, 50%) var(--card-my, 50%),
+      oklch(var(--glow-accent) / 0.7),
+      oklch(var(--glow-primary) / 0.45) 40%,
+      transparent 70%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  .glow-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      260px circle at var(--card-mx, 50%) var(--card-my, 50%),
+      oklch(var(--glow-primary) / 0.12),
+      transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .glow-card:hover::before,
+  .glow-card:focus-within::before {
+    opacity: 1;
+  }
+  .glow-card:hover::after,
+  .glow-card:focus-within::after {
+    opacity: 1;
+  }
+
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s
+      ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Neon button treatment */
+  .btn-neon {
+    position: relative;
+    box-shadow: 0 0 0 0 oklch(var(--primary) / 0);
+  }
+  .btn-neon:hover {
+    box-shadow: 0 0 18px -2px oklch(var(--primary) / 0.55), 0 0 40px -12px
+      oklch(var(--accent) / 0.5);
+  }
+  .btn-neon-accent:hover {
+    box-shadow: 0 0 18px -2px oklch(var(--accent) / 0.6), 0 0 40px -12px
+      oklch(var(--primary) / 0.45);
+  }
+
+  .page-enter {
+    animation: page-enter 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect reduced motion: kill decorative motion + glow */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .flashlight-layer {
+    display: none;
+  }
+  .glow-card::before,
+  .glow-card::after {
+    display: none;
+  }
+  .hover-lift:hover {
+    transform: none;
+  }
+  .page-enter {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Touch devices: no cursor effects */
+@media (hover: none), (pointer: coarse) {
+  .flashlight-layer {
+    display: none;
+  }
+  .glow-card::before,
+  .glow-card::after {
+    display: none;
+  }
+}

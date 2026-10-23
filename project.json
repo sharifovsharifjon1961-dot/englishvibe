@@ -1,0 +1,23 @@
+{
+  "overview": "CEFR Master is an English course platform for B1, B2 and C1 students with mock tests, reading, listening, speaking, writing, a dictionary, a link library and a no-code admin dashboard.",
+  "features": [
+    "Mock Tests Hub with full-length and topic-wise tests, level and skill filters, a timed test runner with question navigator and flagging, and a result summary with a CEFR level estimate",
+    "Reading practice with passages beside their questions, adjustable font size, text highlighting and a start/pause/reset timer",
+    "Listening practice with a custom audio player, speed control, skip controls and play-once mode",
+    "Speaking practice with question cards by level, prep and speaking countdowns, and voice recording with playback and download",
+    "Writing practice with essay prompts, a live word counter, autosaved drafts and a collapsible model answer",
+    "Dictionary with CEFR level badges, definitions, synonyms, example sentences, pronunciation audio, saved words and flashcards",
+    "Link library of external resources with search and category filters",
+    "Admin dashboard with passcode login to create, edit and delete all content, plus JSON import and export",
+    "Dark and light theme with a cursor flashlight effect and glowing cards"
+  ],
+  "category": "education",
+  "tags": [
+    "education",
+    "language-learning",
+    "cefr",
+    "english",
+    "practice-tests"
+  ],
+  "last_updated": "2026-10-23T05:53:22.476Z"
+}

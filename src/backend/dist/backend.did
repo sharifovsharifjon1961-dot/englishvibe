@@ -1,0 +1,236 @@
+type WritingPrompt = 
+ record {
+   id: Id;
+   level: CefrLevel;
+   maxWords: nat;
+   minWords: nat;
+   modelAnswer: text;
+   prompt: text;
+   title: text;
+ };
+type WritingDraft = 
+ record {
+   promptId: Id;
+   "text": text;
+   updatedAt: Timestamp;
+ };
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type Timestamp = int;
+type TestQuestion = 
+ record {
+   choice: opt ChoiceQuestion;
+   id: Id;
+   kind: variant {
+           choice;
+           matching;
+         };
+   matching: opt MatchingQuestion;
+   skill: Skill;
+ };
+type SpeakingCard = 
+ record {
+   id: Id;
+   level: CefrLevel;
+   prepSeconds: nat;
+   prompt: text;
+   speakSeconds: nat;
+   tips: text;
+ };
+type Skill = 
+ variant {
+   grammar;
+   listening;
+   reading;
+   speaking;
+   vocabulary;
+   writing;
+ };
+type SavedWord = 
+ record {
+   definition: text;
+   level: opt CefrLevel;
+   savedAt: Timestamp;
+   word: text;
+ };
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type ReadingPassage = 
+ record {
+   body: text;
+   choiceQuestions: vec ChoiceQuestion;
+   id: Id;
+   level: CefrLevel;
+   matchingQuestions: vec MatchingQuestion;
+   title: text;
+ };
+type MockTest = 
+ record {
+   description: text;
+   durationSeconds: nat;
+   id: Id;
+   kind: variant {
+           fullLength;
+           topicWise;
+         };
+   level: CefrLevel;
+   questions: vec TestQuestion;
+   skill: Skill;
+   title: text;
+ };
+type MatchingQuestion = 
+ record {
+   correctRightIndex: vec nat;
+   id: Id;
+   left: vec text;
+   prompt: text;
+   right: vec text;
+ };
+type ListeningItem = 
+ record {
+   audioUrl: text;
+   id: Id;
+   level: CefrLevel;
+   questions: vec ChoiceQuestion;
+   title: text;
+   transcript: text;
+ };
+type Id = nat;
+type ExternalLink = 
+ record {
+   category: text;
+   description: text;
+   id: Id;
+   level: opt CefrLevel;
+   title: text;
+   url: text;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type ContentBundle = 
+ record {
+   announcements: vec Announcement;
+   links: vec ExternalLink;
+   listening: vec ListeningItem;
+   passages: vec ReadingPassage;
+   speakingCards: vec SpeakingCard;
+   tests: vec MockTest;
+   writingPrompts: vec WritingPrompt;
+ };
+type ChoiceQuestion = 
+ record {
+   correctIndex: nat;
+   explanation: text;
+   id: Id;
+   options: vec text;
+   prompt: text;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type CefrLevel = 
+ variant {
+   b1;
+   b2;
+   c1;
+ };
+type Announcement = 
+ record {
+   body: text;
+   createdAt: Timestamp;
+   id: Id;
+   title: text;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  /// Check the admin passcode. Returns true when the passcode matches.
+  checkAdminPasscode: (passcode: text) -> (bool) query;
+  deleteAnnouncement: (id: nat) -> (bool);
+  deleteDraft: (promptId: nat) -> (bool);
+  deleteLink: (id: nat) -> (bool);
+  deleteListening: (id: nat) -> (bool);
+  deletePassage: (id: nat) -> (bool);
+  deleteSpeakingCard: (id: nat) -> (bool);
+  deleteTest: (id: nat) -> (bool);
+  deleteWritingPrompt: (id: nat) -> (bool);
+  execute: (qJson: text) -> (Result) query;
+  exportContent: () -> (text) query;
+  getAnnouncement: (id: nat) -> (opt Announcement) query;
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getDraft: (promptId: nat) -> (opt WritingDraft);
+  getLink: (id: nat) -> (opt ExternalLink) query;
+  getListening: (id: nat) -> (opt ListeningItem) query;
+  getPassage: (id: nat) -> (opt ReadingPassage) query;
+  getSpeakingCard: (id: nat) -> (opt SpeakingCard) query;
+  getTest: (id: nat) -> (opt MockTest) query;
+  getWritingPrompt: (id: nat) -> (opt WritingPrompt) query;
+  importContent: (json: text) -> (ContentBundle);
+  isCallerAdmin: () -> (bool) query;
+  listAnnouncements: () -> (vec Announcement) query;
+  listDrafts: () -> (vec WritingDraft);
+  listLinks: () -> (vec ExternalLink) query;
+  listListening: () -> (vec ListeningItem) query;
+  listPassages: () -> (vec ReadingPassage) query;
+  listSavedWords: () -> (vec SavedWord);
+  listSpeakingCards: () -> (vec SpeakingCard) query;
+  listTests: () -> (vec MockTest) query;
+  listWritingPrompts: () -> (vec WritingPrompt) query;
+  removeSavedWord: (word: text) -> (bool);
+  saveDraft: (draft: WritingDraft) -> (WritingDraft);
+  saveWord: (word: SavedWord) -> ();
+  schema: () -> (text) query;
+  upsertAnnouncement: (announcement: Announcement) -> (Announcement);
+  upsertLink: (link: ExternalLink) -> (ExternalLink);
+  upsertListening: (item: ListeningItem) -> (ListeningItem);
+  upsertPassage: (passage: ReadingPassage) -> (ReadingPassage);
+  upsertSpeakingCard: (card: SpeakingCard) -> (SpeakingCard);
+  upsertTest: (test: MockTest) -> (MockTest);
+  upsertWritingPrompt: (prompt: WritingPrompt) -> (WritingPrompt);
+}
